@@ -1,0 +1,43 @@
+﻿@model Datos.Model.Vehiculo
+
+@{
+    ViewData["Title"] = "Edit";
+}
+
+<h4>Vehiculo</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Placa" />
+            <input type="hidden" asp-for="Estado" />
+            <div class="form-group">
+                <label asp-for="Chasis" class="control-label"></label>
+                <input asp-for="Chasis" class="form-control" />
+                <span asp-validation-for="Chasis" class="text-danger"></span>
+            </div>           
+            <div class="form-group">
+                <label asp-for="TipoVehiculo" class="control-label"></label>
+                <select asp-for="TipoVehiculo" class="form-control" asp-items="ViewBag.TipoVehiculo"></select>
+                <span asp-validation-for="TipoVehiculo" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="CedulaCliente" class="control-label"></label>
+                <select asp-for="CedulaCliente" class="form-control" asp-items="ViewBag.CedulaCliente"></select>
+                <span asp-validation-for="CedulaCliente" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Modificar" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Atras</a>
+</div>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}

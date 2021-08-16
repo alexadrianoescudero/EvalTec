@@ -1,0 +1,76 @@
+﻿@model IEnumerable<Datos.Model.Cliente>
+
+@{
+    ViewData["Title"] = "Index";
+}
+
+<p>
+    <a asp-action="Create">Nuevo</a>
+</p>
+<table id="example" class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Nombre)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Apellido)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Direccion)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Estado)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Nombre)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Apellido)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.Direccion)
+                </td>
+                <td>
+                    @if (item.Estado == 1)
+                    {
+                        <label>Activado</label>
+                    }
+                    else
+                    {
+                        <label>Desactivado</label>
+                    }
+                </td>
+                <td>
+                    <a asp-action="Edit" asp-route-id="@item.Cedula">Editar</a> |
+                    <a asp-action="Details" asp-route-id="@item.Cedula">Detalle</a> |
+                    @if (item.Estado == 1)
+                    {
+                        <a asp-action="Desactivar" asp-route-id="@item.Cedula">Desactivar</a>
+                    }
+                    else
+                    {
+                        <a asp-action="Activar" asp-route-id="@item.Cedula">Activar</a>
+                    }
+                </td>
+            </tr>
+        }
+    </tbody>
+</table>
+@section Scripts
+{
+    <script type="text/javascript" src="~/js/TablaPaginacion.js"></script>
+    <script>
+        $(document).ready(function () {
+            $('#example').dataTable();
+        });
+    </script>
+
+}
